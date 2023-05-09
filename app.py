@@ -51,27 +51,27 @@ def page():
             start_year, end_year = st.sidebar.selectbox(
                 'Year range',
                 list(reversed(range(1990, 2023)))
+            )
             
-            
-            acousticness = st.slider(
+            acousticness = st.sidebar(
                 'Acousticness',
                 0.0, 1.0, 0.5)
-            danceability = st.slider(
+            danceability = st.sidebar(
                 'Danceability',
                 0.0, 1.0, 0.5)
             energy = st.slider(
                 'Energy',
                 0.0, 1.0, 0.5)
-            instrumentalness = st.slider(
+            instrumentalness = st.sidebar(
                 'Instrumentalness',
                 0.0, 1.0, 0.0)
-            valence = st.slider(
+            valence = st.sidebar(
                 'Valence',
                 0.0, 1.0, 0.45)
-            tempo = st.slider(
+            tempo = st.sidebar(
                 'Tempo',
                 0.0, 244.0, 118.0)
-            )
+           
     tracks_per_page = 8
     test_feat = [acousticness, danceability, energy, instrumentalness, valence, tempo]
     uris, audios = n_neighbors_uri_audio(genre, start_year, end_year, test_feat)
