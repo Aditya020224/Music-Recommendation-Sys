@@ -71,7 +71,7 @@ def page():
                 'Tempo',
                 0.0, 244.0, 118.0)
 
-    tracks_per_page = 6
+    tracks_per_page = 8
     test_feat = [acousticness, danceability, energy, instrumentalness, valence, tempo]
     uris, audios = n_neighbors_uri_audio(genre, start_year, end_year, test_feat)
 
@@ -113,7 +113,7 @@ def page():
                             r=audio[:5],
                             theta=audio_feats[:5]))
                             fig = px.line_polar(df, r='r', theta='theta', line_close=True)
-                            fig.update_layout(height=400, width=240)
+                            fig.update_layout(height=400, width=340)
                             st.plotly_chart(fig)
             
                 else:
@@ -127,7 +127,7 @@ def page():
                                 r=audio[:5],
                                 theta=audio_feats[:5]))
                             fig = px.line_polar(df, r='r', theta='theta', line_close=True)
-                            fig.update_layout(height=400, width=240)
+                            fig.update_layout(height=400, width=340)
                             st.plotly_chart(fig)
 
         else:
