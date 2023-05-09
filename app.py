@@ -48,7 +48,7 @@ def page():
                 genre_names, index=genre_names.index("Pop"))
         with col1:
             st.sidebar.header("***Feature customization:***")
-            start_year, end_year = st..sidebar.selectbox(
+            start_year, end_year = st.sidebar.selectbox(
                 'Year range',
                 list(reversed(range(1990, 2023))))
             )
