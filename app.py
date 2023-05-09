@@ -51,22 +51,22 @@ def page():
             start_year, end_year = st.sidebar.selectbox(
                 'Year range',
                 list(reversed(range(1990, 2023))))
-            acousticness = st.sidebar.slider(
+            acousticness = st.slider(
                 'Acousticness',
                 0.0, 1.0, 0.5)
-            danceability = st.sidebar.slider(
+            danceability = st.slider(
                 'Danceability',
                 0.0, 1.0, 0.5)
-            energy = st.sidebar.slider(
+            energy = st.slider(
                 'Energy',
                 0.0, 1.0, 0.5)
-            instrumentalness = st.sidebar.slider(
+            instrumentalness = st.slider(
                 'Instrumentalness',
                 0.0, 1.0, 0.0)
-            valence = st.sidebar.slider(
+            valence = st.slider(
                 'Valence',
                 0.0, 1.0, 0.45)
-            tempo = st.sidebar.slider(
+            tempo = st.slider(
                 'Tempo',
                 0.0, 244.0, 118.0)
 
@@ -112,7 +112,7 @@ def page():
                             r=audio[:5],
                             theta=audio_feats[:5]))
                             fig = px.line_polar(df, r='r', theta='theta', line_close=True)
-                            fig.update_layout(height=400, width=240)
+                            fig.update_layout(height=400, width=340)
                             st.plotly_chart(fig)
             
                 else:
@@ -126,7 +126,7 @@ def page():
                                 r=audio[:5],
                                 theta=audio_feats[:5]))
                             fig = px.line_polar(df, r='r', theta='theta', line_close=True)
-                            fig.update_layout(height=400, width=240)
+                            fig.update_layout(height=400, width=340)
                             st.plotly_chart(fig)
 
         else:
