@@ -42,15 +42,16 @@ def page():
     with st.container():
         col1, col2,col3,col4 = st.columns((2,0.5,0.5,0.5))
         with col3:
-            st.markdown("***Select genre:***")
+            st.sidebar.header("***Select genre:***")
             genre = st.radio(
                 "",
                 genre_names, index=genre_names.index("Pop"))
         with col1:
             st.sidebar.header("***Feature customization:***")
-            start_year, end_year = st.sidebar.slider(
+            start_year, end_year = st.slider(
                 'Year range',
-                list(reversed(range(1990, 2023))))
+                (1990, 2023)
+            )
             
             acousticness = st.slider(
                 'Acousticness',
