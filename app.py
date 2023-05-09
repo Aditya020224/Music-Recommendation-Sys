@@ -43,15 +43,15 @@ def page():
         col1, col2,col3,col4 = st.columns((2,0.5,0.5,0.5))
         with col3:
             st.sidebar.header("***Select genre:***")
-            genre = st.radio(
+            genre = st.sidebar.radio(
                 "",
                 genre_names, index=genre_names.index("Pop"))
         with col1:
             st.sidebar.header("***Feature customization:***")
-            start_year, end_year = st.slider(
+            start_year, end_year = st.sidebar.selectbox(
                 'Year range',
-                (1990, 2023)
-            )
+                list(reversed(range(1990, 2023)))
+            
             
             acousticness = st.slider(
                 'Acousticness',
@@ -71,7 +71,7 @@ def page():
             tempo = st.slider(
                 'Tempo',
                 0.0, 244.0, 118.0)
-
+            )
     tracks_per_page = 8
     test_feat = [acousticness, danceability, energy, instrumentalness, valence, tempo]
     uris, audios = n_neighbors_uri_audio(genre, start_year, end_year, test_feat)
