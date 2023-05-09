@@ -51,7 +51,6 @@ def page():
             start_year, end_year = st.sidebar.selectbox(
                 'Year range',
                 list(reversed(range(1990, 2023))))
-            )
             acousticness = st.sidebar.slider(
                 'Acousticness',
                 0.0, 1.0, 0.5)
