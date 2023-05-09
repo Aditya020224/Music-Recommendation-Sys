@@ -1,5 +1,5 @@
 import streamlit as st
-st.set_page_config(page_title="Song Recommendation", layout="wide")
+st.set_page_config(page_title="Music Recommendation", layout="wide")
 
 import pandas as pd
 from sklearn.neighbors import NearestNeighbors
@@ -33,45 +33,45 @@ def n_neighbors_uri_audio(genre, start_year, end_year, test_feat):
     return uris, audios
 
 def page():
-    title = "Song Recommendation Engine"
+    title = "Music Recommendation System"
     st.title(title)
 
-    st.write("First of all, welcome! This is the place where you can customize what you want to listen to based on genre and several key audio features. Try playing around with different settings and listen to the songs recommended by our system!")
+    st.write("Welcome! Here you can listen to the songs recommended by our system and can customize what you want to listen to based on audio features and genres!")
     st.markdown("##")
 
     with st.container():
         col1, col2,col3,col4 = st.columns((2,0.5,0.5,0.5))
         with col3:
-            st.markdown("***Choose your genre:***")
+            st.markdown("***Select genre:***")
             genre = st.radio(
                 "",
                 genre_names, index=genre_names.index("Pop"))
         with col1:
-            st.markdown("***Choose features to customize:***")
-            start_year, end_year = st.slider(
-                'Select the year range',
-                1990, 2019, (2015, 2019)
+            st.sidebar.header("***Feature customization:***")
+            start_year, end_year = st..sidebar.selectbox(
+                'Year range',
+                list(reversed(range(1990, 2023))))
             )
-            acousticness = st.slider(
+            acousticness = st.sidebar.slider(
                 'Acousticness',
                 0.0, 1.0, 0.5)
-            danceability = st.slider(
+            danceability = st.sidebar.slider(
                 'Danceability',
                 0.0, 1.0, 0.5)
-            energy = st.slider(
+            energy = st.sidebar.slider(
                 'Energy',
                 0.0, 1.0, 0.5)
-            instrumentalness = st.slider(
+            instrumentalness = st.sidebar.slider(
                 'Instrumentalness',
                 0.0, 1.0, 0.0)
-            valence = st.slider(
+            valence = st.sidebar.slider(
                 'Valence',
                 0.0, 1.0, 0.45)
-            tempo = st.slider(
+            tempo = st.sidebar.slider(
                 'Tempo',
                 0.0, 244.0, 118.0)
 
-    tracks_per_page = 6
+    tracks_per_page = 8
     test_feat = [acousticness, danceability, energy, instrumentalness, valence, tempo]
     uris, audios = n_neighbors_uri_audio(genre, start_year, end_year, test_feat)
 
@@ -108,12 +108,12 @@ def page():
                             track,
                             height=400,
                         )
-                        with st.expander("See more details"):
+                        with st.expander("See details"):
                             df = pd.DataFrame(dict(
                             r=audio[:5],
                             theta=audio_feats[:5]))
                             fig = px.line_polar(df, r='r', theta='theta', line_close=True)
-                            fig.update_layout(height=400, width=340)
+                            fig.update_layout(height=400, width=240)
                             st.plotly_chart(fig)
             
                 else:
@@ -122,12 +122,12 @@ def page():
                             track,
                             height=400,
                         )
-                        with st.expander("See more details"):
+                        with st.expander("See details"):
                             df = pd.DataFrame(dict(
                                 r=audio[:5],
                                 theta=audio_feats[:5]))
                             fig = px.line_polar(df, r='r', theta='theta', line_close=True)
-                            fig.update_layout(height=400, width=340)
+                            fig.update_layout(height=400, width=240)
                             st.plotly_chart(fig)
 
         else:
