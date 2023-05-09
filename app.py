@@ -53,24 +53,24 @@ def page():
                 list(reversed(range(1990, 2023)))
             )
             
-            acousticness = st.sidebar(
+            acousticness = st.sidebar.slider(
                 'Acousticness',
-                0.0, 1.0, 0.5)
-            danceability = st.sidebar(
+               list(reversed(range(0.0, 1.0, 0.5))))
+            danceability = st.sidebar.slider(
                 'Danceability',
-                0.0, 1.0, 0.5)
+            list(reversed(range(0.0, 1.0, 0.5))))
             energy = st.slider(
                 'Energy',
-                0.0, 1.0, 0.5)
-            instrumentalness = st.sidebar(
+                list(reversed(range(0.0, 1.0, 0.5))))
+            instrumentalness = st.sidebar.slider(
                 'Instrumentalness',
-                0.0, 1.0, 0.0)
-            valence = st.sidebar(
+               list(reversed(range(0.0, 1.0, 0.0))))
+            valence = st.sidebar.slider(
                 'Valence',
-                0.0, 1.0, 0.45)
-            tempo = st.sidebar(
+             list(reversed(range(0.0, 1.0, 0.45))))
+            tempo = st.sidebar.slider(
                 'Tempo',
-                0.0, 244.0, 118.0)
+               list(reversed(range(0.0, 244.0, 118.0))))
            
     tracks_per_page = 8
     test_feat = [acousticness, danceability, energy, instrumentalness, valence, tempo]
