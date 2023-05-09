@@ -52,6 +52,7 @@ def page():
                 'Year range',
                 list(reversed(range(1990, 2023)))
             )
+        with col1:
             st.sidebar.header("***Customize:***")
             acousticness = st.sidebar.selectbox(
                 'Acousticness',
