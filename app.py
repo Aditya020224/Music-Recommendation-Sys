@@ -1,5 +1,5 @@
 import streamlit as st
-st.set_page_config(page_title="Song Recommendation", layout="wide")
+st.set_page_config(page_title="Music Recommendation", layout="wide")
 
 import pandas as pd
 from sklearn.neighbors import NearestNeighbors
@@ -33,24 +33,24 @@ def n_neighbors_uri_audio(genre, start_year, end_year, test_feat):
     return uris, audios
 
 def page():
-    title = "Song Recommendation Engine"
+    title = "Music Recommendation System"
     st.title(title)
 
-    st.write("First of all, welcome! This is the place where you can customize what you want to listen to based on genre and several key audio features. Try playing around with different settings and listen to the songs recommended by our system!")
+    st.write("Welcome! Here you can listen to the songs recommended by our system and customize it based on audio features and genres!")
     st.markdown("##")
 
     with st.container():
         col1, col2,col3,col4 = st.columns((2,0.5,0.5,0.5))
         with col3:
-            st.markdown("***Choose your genre:***")
-            genre = st.radio(
+            st.sidebar.header("***Select genre:***")
+            genre = st.sidebar.radio(
                 "",
-                genre_names, index=genre_names.index("Pop"))
+                genre_names, index=genre_names.index("K-pop"))
         with col1:
-            st.markdown("***Choose features to customize:***")
+            st.markdown("***Feature customization:***")
             start_year, end_year = st.slider(
-                'Select the year range',
-                1990, 2019, (2015, 2019)
+                'Year Range',
+                1990, 2023, (2010, 2023)
             )
             acousticness = st.slider(
                 'Acousticness',
@@ -108,12 +108,12 @@ def page():
                             track,
                             height=400,
                         )
-                        with st.expander("See more details"):
+                        with st.expander("See details"):
                             df = pd.DataFrame(dict(
                             r=audio[:5],
                             theta=audio_feats[:5]))
                             fig = px.line_polar(df, r='r', theta='theta', line_close=True)
-                            fig.update_layout(height=400, width=340)
+                            fig.update_layout(height=400, width=240)
                             st.plotly_chart(fig)
             
                 else:
@@ -122,12 +122,12 @@ def page():
                             track,
                             height=400,
                         )
-                        with st.expander("See more details"):
+                        with st.expander("See details"):
                             df = pd.DataFrame(dict(
                                 r=audio[:5],
                                 theta=audio_feats[:5]))
                             fig = px.line_polar(df, r='r', theta='theta', line_close=True)
-                            fig.update_layout(height=400, width=340)
+                            fig.update_layout(height=400, width=240)
                             st.plotly_chart(fig)
 
         else:
