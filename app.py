@@ -53,22 +53,22 @@ def page():
                 list(reversed(range(1990, 2023)))
             )
             st.sidebar.header("***Customize:***")
-            acousticness = st.sidebar.slider(
+            acousticness = st.sidebar.selectbox(
                 'Acousticness',
                list(reversed(range(0.0, 1.0, 0.5))))
-            danceability = st.sidebar.slider(
+            danceability = st.sidebar.selectbox(
                 'Danceability',
             list(reversed(range(0.0, 1.0, 0.5))))
-            energy = st.slider(
+            energy = st.sidebar.selectbox(
                 'Energy',
                 list(reversed(range(0.0, 1.0, 0.5))))
-            instrumentalness = st.sidebar.slider(
+            instrumentalness = st.sidebar.selectbox(
                 'Instrumentalness',
                list(reversed(range(0.0, 1.0, 0.0))))
-            valence = st.sidebar.slider(
+            valence = st.sidebar.selectbox(
                 'Valence',
              list(reversed(range(0.0, 1.0, 0.45))))
-            tempo = st.sidebar.slider(
+            tempo = st.sidebar.selectbox(
                 'Tempo',
                list(reversed(range(0.0, 244.0, 118.0))))
            
