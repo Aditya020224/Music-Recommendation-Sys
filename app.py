@@ -71,7 +71,7 @@ def page():
             st.sidebar.header("***Select genre:***")
             genre = st.sidebar.radio(
                 "",
-                genre_names, index=genre_names.index("K-Pop"))
+                genre_names, index=genre_names.index("K-pop"))
             with col1:
                 st.markdown("***Customize Features :***")
                 start_year, end_year = st.slider(
