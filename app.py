@@ -1,4 +1,5 @@
 import streamlit as st
+st.set_page_config(page_title="Music Recommendation", layout="wide")
 
 # Create a login form
 st.title("User Login")
@@ -35,10 +36,6 @@ if "redirect_to" in st.session_state:
     st.experimental_redirect(st.session_state["redirect_to"])
 
 
-
-
-
-st.set_page_config(page_title="Music Recommendation", layout="wide")
 
 import pandas as pd
 from sklearn.neighbors import NearestNeighbors
