@@ -41,6 +41,9 @@ def login_page():
              recommendation_page()
         else:
              st.warning("Invalid username or password.")
+             st.session_state["register"] = False
+            
+     st.markdown("Don't have an account? [Create one](?register=true)")
 
 # Create a registration form
 def register_page():
@@ -63,6 +66,7 @@ def register_page():
            df.to_csv("user_data.csv", index=False)
            st.success("Account created successfully!")
            st.session_state["is_logged_in"] = True
+           st.session_state["register"] = False
         else:
             st.warning("Please enter all of the required details.")
 
@@ -168,12 +172,16 @@ def recommendation_page():
             st.write("No songs left to recommend")
             
 def main():
-    st.session_state["is_logged_in"] = False
+    st.session_state.setdefault("is_logged_in", False)
 
     if not st.session_state["is_logged_in"]:
-        login_page()
-        if "register" in st.session_state and st.session_state["register"]:
+        if "register" in st.experimental_get_query_params():
+            st.session_state["register"] = True
             register_page()
+        else:
+            login_page()
+            if "register" in st.session_state and st.session_state["register"]:
+                register_page()
     else:
         recommendation_page()
 
