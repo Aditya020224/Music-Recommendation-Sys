@@ -62,9 +62,8 @@ def register_page():
                 "Password": [password]
             }
            df = pd.DataFrame(user_data)
-           df.to_csv("user_data.csv", mode="a", index=False, header=not st.session_state.get("is_csv_created", False))
-           st.success("Account created successfully!")
-           st.session_state["is_csv_created"] = True
+           df.to_csv("user_data.csv", mode="a", index=False)
+           st.success("Account created successfully! Please log in.")
            st.session_state["register"] = False
            st.experimental_rerun() 
         else:
