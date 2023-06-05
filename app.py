@@ -27,19 +27,6 @@ password2 = st.text_input("Password", type="password", key="password2")
 # If the user enters all of the required details, create the account
 if st.button("Create Account"):
     if first_name and last_name and email and password2:
-        # Hash the password
-        hashed_password = hashlib.sha256(password2.encode()).hexdigest()
-
-        # Create a new user in the database
-        user_data = {
-            "first_name": first_name,
-            "last_name": last_name,
-            "email": email,
-            "password": hashed_password,
-        }
-        database = Database()
-        database.insert(user_data)
-
         st.success("Account created successfully!")
         st.redirect("/recommendation")
     else:
