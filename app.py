@@ -14,11 +14,11 @@ password1 = st.text_input("Password", type="password", key="password1")
 # If the user enters a valid username and password, log them in
 if st.button("Login"):
     if username == "admin" and password1 == "password":
-            st.success("Login successful!")
-            st.session_state["is_logged_in"] = True
-            st.experimental_rerun()  # Rerun the app to show the recommendation page
-        else:
-            st.warning("Invalid username or password.")
+         st.success("Login successful!")
+         st.session_state["is_logged_in"] = True
+         st.experimental_rerun()  # Rerun the app to show the recommendation page
+    else:
+         st.warning("Invalid username or password.")
 
 # Create a registration form
 def register_page():
@@ -35,8 +35,8 @@ if st.button("Create Account"):
         st.success("Account created successfully!")
         st.session_state["is_logged_in"] = True
         st.experimental_rerun()  # Rerun the app to show the recommendation page
-        else:
-            st.warning("Please enter all of the required details.")
+    else:
+        st.warning("Please enter all of the required details.")
 
 
 def recommendation_page():
