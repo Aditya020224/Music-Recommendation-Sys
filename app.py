@@ -191,6 +191,7 @@ def main():
         if "register" in st.experimental_get_query_params():
             st.session_state["register"] = True
             register_page()
+            st.stop()
         else:
             if not st.session_state.get("is_csv_created", False):
                 df = pd.DataFrame(columns=["Username", "Password"])
@@ -200,6 +201,7 @@ def main():
             login_page()
             if "register" in st.session_state and st.session_state["register"]:
                 register_page()
+                st.stop()
 
         if st.session_state["is_logged_in"]:
             recommendation_page()
