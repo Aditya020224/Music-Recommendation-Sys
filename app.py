@@ -37,13 +37,13 @@ def login_page():
 # If the user enters a valid username and password, log them in
     if st.button("Login"):
       user_data = pd.read_csv("user_data.csv")
-        if username in user_data["Username"].values and password in user_data["Password"].values:
-            st.success("Login successful!")
-            st.session_state["is_logged_in"] = True
-            recommendation_page()
-        else:
-            st.warning("Invalid username or password.")
-            st.session_state["register"] = False
+      if username in user_data["Username"].values and password in user_data["Password"].values:
+          st.success("Login successful!")
+          st.session_state["is_logged_in"] = True
+          recommendation_page()
+      else:
+          st.warning("Invalid username or password.")
+          st.session_state["register"] = False
             
     st.markdown("Don't have an account? [Create one](?register=true)")
 
