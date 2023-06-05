@@ -59,10 +59,10 @@ def register_page():
                 "Email": [email],
                 "Password": [password2]
             }
-            df = pd.DataFrame(user_data)
-            df.to_csv("user_data.csv", index=False)
-            st.success("Account created successfully!")
-            st.session_state["is_logged_in"] = True
+           df = pd.DataFrame(user_data)
+           df.to_csv("user_data.csv", index=False)
+           st.success("Account created successfully!")
+           st.session_state["is_logged_in"] = True
         else:
             st.warning("Please enter all of the required details.")
 
