@@ -44,8 +44,6 @@ def login_page():
       else:
           st.warning("Invalid username or password.")
             
-      st.session_state["register"] = False
-            
     st.markdown("Don't have an account? [Create one](?register=true)")
 
 # Create a registration form
@@ -84,7 +82,7 @@ def recommendation_page():
             st.sidebar.header("***Select genre:***")
             genre = st.sidebar.radio(
                 "",
-                genre_names, index=genre_names.index("K-pop"))
+                genre_names, index=genre_names.index("K-pop"), key="genre_radio")
             with col1:
                 st.markdown("***Customize Features :***")
                 start_year, end_year = st.slider(
@@ -93,22 +91,22 @@ def recommendation_page():
                 )
                 acousticness = st.slider(
                     'Acousticness',
-                    0.0, 1.0, 0.5)
+                    0.0, 1.0, 0.5, key="acousticness_slider")
                 danceability = st.slider(
                     'Danceability',
-                    0.0, 1.0, 0.5)
+                    0.0, 1.0, 0.5, key="danceability_slider")
                 energy = st.slider(
                     'Energy',
-                    0.0, 1.0, 0.5)
+                    0.0, 1.0, 0.5, key="energy_slider")
                 instrumentalness = st.slider(
                     'Instrumentalness',
-                    0.0, 1.0, 0.0)
+                    0.0, 1.0, 0.0, key="instrumentalness_slider")
                 valence = st.slider(
                     'Valence',
-                    0.0, 1.0, 0.45)
+                    0.0, 1.0, 0.45, key="valence_slider")
                 tempo = st.slider(
                     'Tempo',
-                    0.0, 244.0, 118.0)
+                    0.0, 244.0, 118.0, key="tempo_slider")
                     
     tracks_per_page = 6
     test_feat = [acousticness, danceability, energy, instrumentalness, valence, tempo]
