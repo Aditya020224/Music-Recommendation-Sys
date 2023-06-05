@@ -39,18 +39,16 @@ def register_page():
 
 
 def page():
- @st.cache(allow_output_mutation=True)
-
- def load_data():
-     df = pd.read_csv("data/processed_track_df.csv")
-     df['genres'] = df.genres.apply(lambda x: [i[1:-1] for i in str(x)[1:-1].split(", ")])
-     exploded_track_df = df.explode("genres")
-     return exploded_track_df
-
-genre_names = ['Dance Pop', 'Electronic', 'Electropop', 'Hip Hop', 'Jazz', 'K-pop', 'Latin', 'Pop', 'Pop Rap', 'R&B', 'Rock']
-audio_feats = ["acousticness", "danceability", "energy", "instrumentalness", "valence", "tempo"]
-
-exploded_track_df = load_data()
+    @st.cache(allow_output_mutation=True)
+    def load_data():
+        df = pd.read_csv("data/processed_track_df.csv")
+        df['genres'] = df.genres.apply(lambda x: [i[1:-1] for i in str(x)[1:-1].split(", ")])
+        exploded_track_df = df.explode("genres")
+        return exploded_track_df
+    
+    genre_names = ['Dance Pop', 'Electronic', 'Electropop', 'Hip Hop', 'Jazz', 'K-pop', 'Latin', 'Pop', 'Pop Rap', 'R&B', 'Rock']
+    audio_feats = ["acousticness", "danceability", "energy", "instrumentalness", "valence", "tempo"]
+    exploded_track_df = load_data()
 
 def n_neighbors_uri_audio(genre, start_year, end_year, test_feat):
     genre = genre.lower()
