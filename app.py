@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from sklearn.neighbors import NearestNeighbors
 import plotly.express as px
+import uuid
 import streamlit.components.v1 as components
 st.set_page_config(page_title="Music Recommendation", layout="wide")
 
