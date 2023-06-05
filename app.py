@@ -62,7 +62,7 @@ def register_page():
                 "First Name": [first_name],
                 "Last Name": [last_name],
                 "Email": [email],
-                "Password": [password2]
+                "Password": [password]
             }
              df = pd.DataFrame(user_data)
              df.to_csv("user_data.csv", index=False)
