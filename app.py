@@ -31,7 +31,7 @@ if st.button("Create Account"):
         st.warning("Please enter all of the required details.")
 
 # Redirect the user to the recommendation page
-st.stop()
+st.experimental_redirect("/recommendation")
 
 
 
