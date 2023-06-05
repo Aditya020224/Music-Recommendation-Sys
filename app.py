@@ -58,11 +58,16 @@ def register_page():
 # If the user enters all of the required details, create the account
     if st.button("Create Account"):
         if first_name and last_name and email and password:
-            new_user = {"Username": [first_name], "Password": [password]}
-            user_data = user_data.append(pd.DataFrame(new_user), ignore_index=True)
-            save_user_data(user_data)
-            
-            st.success("Account created successfully! Please log in.")
+             user_data = {
+                "First Name": [first_name],
+                "Last Name": [last_name],
+                "Email": [email],
+                "Password": [password2]
+            }
+            df = pd.DataFrame(user_data)
+            df.to_csv("user_data.csv", index=False)
+            st.success("Account created successfully!")
+            st.session_state["register"] = False
             st.experimental_rerun()
         else:
             st.warning("Please enter all of the required details.")
