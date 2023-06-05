@@ -1,41 +1,47 @@
 import streamlit as st
+# Create a login form
 st.title("User Login")
 
 username = st.text_input("Username", key="username")
 password1 = st.text_input("Password", type="password", key="password1")
 
-if st.button("Sign In"):
+# If the user enters a valid username and password, log them in
+if st.button("Login"):
     if username == "admin" and password1 == "password":
-        st.success("Login successfull!")
+        st.success("Login successful!")
         st.redirect("/recommendation")
     else:
-        st.warning("Invalid username or password entered.")
+        st.warning("Invalid username or password.")
 
-if st.button("New User Sign Up"):
-    st.write("Enter your details below to create a new account.")
+# Create a register form
+st.write("Enter your details below to create a new account.")
 
-    first_name = st.text_input("First name", key="first_name")
-    last_name = st.text_input("Last name", key="last_name")
-    email = st.text_input("Email", key="email")
-    password2 = st.text_input("Password", type="password", key="password2")
+first_name = st.text_input("First name", key="first_name")
+last_name = st.text_input("Last name", key="last_name")
+email = st.text_input("Email", key="email")
+password2 = st.text_input("Password", type="password", key="password2")
 
-    if st.button("Create Account"):
-        if first_name and last_name and email and password2:
-            hashed_password = st.hash_password(password2)
+# If the user enters all of the required details, create the account
+if st.button("Create Account"):
+    if first_name and last_name and email and password2:
+        # Hash the password
+        hashed_password = st.hash_password(password2)
 
-            user_data = {
-                "first_name": first_name,
-                "last_name": last_name,
-                "email": email,
-                "password": hashed_password,
-            }
-            st.database.insert(user_data)
+        # Create a new user in the database
+        user_data = {
+            "first_name": first_name,
+            "last_name": last_name,
+            "email": email,
+            "password": hashed_password,
+        }
+        st.database.insert(user_data)
 
-            st.success("Account created successfully!")
-            st.redirect("/recommendation")
-        else:
-            st.warning("Please enter all of the required details.")
+        st.success("Account created successfully!")
+        st.redirect("/recommendation")
+    else:
+        st.warning("Please enter all of the required details.")
 
+# Redirect the user to the recommendation page
 st.stop()
 
 
