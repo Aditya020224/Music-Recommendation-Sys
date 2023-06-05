@@ -43,7 +43,7 @@ def login_page():
              st.warning("Invalid username or password.")
              st.session_state["register"] = False
             
-     st.markdown("Don't have an account? [Create one](?register=true)")
+    st.markdown("Don't have an account? [Create one](?register=true)")
 
 # Create a registration form
 def register_page():
