@@ -1,5 +1,6 @@
 import streamlit as st
 import hashlib
+from streamlit.database import Database
 
 # Create a login form
 st.title("User Login")
@@ -36,7 +37,8 @@ if st.button("Create Account"):
             "email": email,
             "password": hashed_password,
         }
-        st.database.insert(user_data)
+        database = Database()
+        database.insert(user_data)
 
         st.success("Account created successfully!")
         st.redirect("/recommendation")
@@ -45,6 +47,7 @@ if st.button("Create Account"):
 
 # Redirect the user to the recommendation page
 st.stop()
+
 
 
 
