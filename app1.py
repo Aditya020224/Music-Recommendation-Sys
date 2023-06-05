@@ -75,7 +75,7 @@ def recommendation_page():
     with st.container():
         col1, col2,col3,col4 = st.columns((2,0.5,0.5,0.5))
         with col1:
-            st.markdown("***Customize Features :***")
+            st.sidebar.header("***Customize Features :***")
             start_year, end_year = st.slider(
                 'Select the year range',
                 1990, 2019, (2010, 2019),
