@@ -123,7 +123,7 @@ def recommendation_page():
                     key=str(uuid.uuid4())
                 )
              with col3:
-            st.markdown("***Recommended Songs :***")
+                st.markdown("***Recommended Songs :***")
 
             tracks_per_page = 5
 
