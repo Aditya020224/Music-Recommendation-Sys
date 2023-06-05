@@ -69,7 +69,7 @@ def register_page():
              st.success("Account created successfully!Please re-login.")
              st.session_state["register"] = False
              st.experimental_rerun()
-            st.stop()
+             st.stop()
         else:
              st.warning("Please enter all of the required details.")
 
