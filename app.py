@@ -124,64 +124,64 @@ def recommendation_page():
                 )
              with col3:
                 st.markdown("***Recommended Songs :***")
-
-            tracks_per_page = 5
-
-            if "tracks" not in st.session_state:
-                st.session_state["tracks"] = []
-                st.session_state["audios"] = []
-
-            tracks = st.session_state["tracks"]
-            audios = st.session_state["audios"]
-
-            if len(tracks) == 0:
+                
+                tracks_per_page = 5
+                
+                if "tracks" not in st.session_state:
+                    st.session_state["tracks"] = []
+                    st.session_state["audios"] = []
+                    
+                tracks = st.session_state["tracks"]
+                audios = st.session_state["audios"]
+                
+                if len(tracks) == 0:
                 # Simulating initial recommendation
-                for i in range(15):
-                    tracks.append(f"Song {i+1}")
-                    audios.append(np.random.rand(10).tolist())
-
-            if "start_track_i" not in st.session_state:
-                st.session_state["start_track_i"] = 0
-
-            if st.button("Next"):
-                if st.session_state["start_track_i"] + tracks_per_page < len(tracks):
-                    st.session_state["start_track_i"] += tracks_per_page
-
-            current_tracks = tracks[st.session_state["start_track_i"]: st.session_state["start_track_i"] + tracks_per_page]
-            current_audios = audios[st.session_state["start_track_i"]: st.session_state["start_track_i"] + tracks_per_page]
-
-            if st.session_state["start_track_i"] < len(tracks):
-                for i, (track, audio) in enumerate(zip(current_tracks, current_audios)):
-                    if i % 2 == 0:
-                        with col1:
-                            components.html(
-                                track,
-                                height=400,
-                            )
-                            with st.expander("See more details"):
-                                df = pd.DataFrame(dict(
-                                    r=audio[:5],
-                                    theta=["feat1", "feat2", "feat3", "feat4", "feat5"]
-                                ))
-                                fig = px.line_polar(df, r='r', theta='theta', line_close=True)
-                                fig.update_layout(height=400, width=340)
-                                st.plotly_chart(fig)
-                    else:
-                        with col3:
-                            components.html(
-                                track,
-                                height=400,
-                            )
-                            with st.expander("See more details"):
-                                df = pd.DataFrame(dict(
-                                    r=audio[:5],
-                                    theta=["feat1", "feat2", "feat3", "feat4", "feat5"]
-                                ))
-                                fig = px.line_polar(df, r='r', theta='theta', line_close=True)
-                                fig.update_layout(height=400, width=340)
-                                st.plotly_chart(fig)
-            else:
-                st.write("No songs left to recommend")
+                    for i in range(15):
+                        tracks.append(f"Song {i+1}")
+                        audios.append(np.random.rand(10).tolist())
+                        
+                if "start_track_i" not in st.session_state:
+                    st.session_state["start_track_i"] = 0
+                    
+                if st.button("Next"):
+                    if st.session_state["start_track_i"] + tracks_per_page < len(tracks):
+                        st.session_state["start_track_i"] += tracks_per_page
+                        
+                current_tracks = tracks[st.session_state["start_track_i"]: st.session_state["start_track_i"] + tracks_per_page]
+                current_audios = audios[st.session_state["start_track_i"]: st.session_state["start_track_i"] + tracks_per_page]
+                
+                if st.session_state["start_track_i"] < len(tracks):
+                    for i, (track, audio) in enumerate(zip(current_tracks, current_audios)):
+                        if i % 2 == 0:
+                            with col1:
+                                components.html(
+                                    track,
+                                    height=400,
+                                )
+                                with st.expander("See more details"):
+                                    df = pd.DataFrame(dict(
+                                        r=audio[:5],
+                                        theta=["feat1", "feat2", "feat3", "feat4", "feat5"]
+                                    ))
+                                    fig = px.line_polar(df, r='r', theta='theta', line_close=True)
+                                    fig.update_layout(height=400, width=340)
+                                    st.plotly_chart(fig)
+                        else:
+                            with col3:
+                                components.html(
+                                    track,
+                                    height=400,
+                                )
+                                with st.expander("See more details"):
+                                    df = pd.DataFrame(dict(
+                                        r=audio[:5],
+                                        theta=["feat1", "feat2", "feat3", "feat4", "feat5"]
+                                    ))
+                                    fig = px.line_polar(df, r='r', theta='theta', line_close=True)
+                                    fig.update_layout(height=400, width=340)
+                                    st.plotly_chart(fig)
+                else:
+                    st.write("No songs left to recommend")
 
 def main():
     st.session_state.setdefault("is_logged_in", False)
