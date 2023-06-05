@@ -43,7 +43,8 @@ def login_page():
           recommendation_page()
       else:
           st.warning("Invalid username or password.")
-          st.session_state["register"] = False
+            
+      st.session_state["register"] = False
             
     st.markdown("Don't have an account? [Create one](?register=true)")
 
