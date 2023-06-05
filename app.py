@@ -83,9 +83,9 @@ def recommendation_page():
              "",
              genre_names, index=genre_names.index("K-pop"), 
              key=str(uuid.uuid4()))
-        with st.container():
-            col1, col2, col3 = st.columns([2, 0.5, 2])
-            with col1:
+         with st.container():
+             col1, col2, col3 = st.columns([2, 0.5, 2])
+             with col1:
                 st.markdown("***Customize Features :***")
                 start_year, end_year = st.slider(
                     'Select the year range',
