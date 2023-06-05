@@ -41,7 +41,7 @@ def login_page():
       if username in user_data["Username"].values and password in user_data["Password"].values:
           st.success("Login successful!")
           st.session_state["is_logged_in"] = True
-          recommendation_page()
+          
       else:
           st.warning("Invalid username or password.")
             
