@@ -64,13 +64,13 @@ def register_page():
                 "Email": [email],
                 "Password": [password2]
             }
-            df = pd.DataFrame(user_data)
-            df.to_csv("user_data.csv", index=False)
-            st.success("Account created successfully!")
-            st.session_state["register"] = False
-            st.experimental_rerun()
+             df = pd.DataFrame(user_data)
+             df.to_csv("user_data.csv", index=False)
+             st.success("Account created successfully!")
+             st.session_state["register"] = False
+             st.experimental_rerun()
         else:
-            st.warning("Please enter all of the required details.")
+             st.warning("Please enter all of the required details.")
 
 def recommendation_page():
     title = "Music Recommendation System"
