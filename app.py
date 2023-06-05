@@ -37,7 +37,7 @@ def register_page():
         else:
             st.warning("Please enter all of the required details.")
 
-@st.cache(allow_output_mutation=True)
+@st.cache_data(allow_output_mutation=True)
 def load_data():
     df = pd.read_csv("data/processed_track_df.csv")
     df['genres'] = df.genres.apply(lambda x: [i[1:-1] for i in str(x)[1:-1].split(", ")])
