@@ -31,17 +31,18 @@ def n_neighbors_uri_audio(genre, start_year, end_year, test_feat):
 def login_page():
     st.title("User Login")
     username = st.text_input("Username", key="username")
-    password1 = st.text_input("Password", type="password", key="password1")
+    password1 = st.text_input("Password", type="password", key="password")
 
 # If the user enters a valid username and password, log them in
     if st.button("Login"):
-        if username == "first_name" and password1 == "password2":
-             st.success("Login successful!")
-             st.session_state["is_logged_in"] = True
-             recommendation_page()
+        user_data = pd.read_csv("user_data.csv")
+        if username in user_data["Username"].values and password in user_data["Password"].values:
+            st.success("Login successful!")
+            st.session_state["is_logged_in"] = True
+            recommendation_page()
         else:
-             st.warning("Invalid username or password.")
-             st.session_state["register"] = False
+            st.warning("Invalid username or password.")
+            st.session_state["register"] = False
             
     st.markdown("Don't have an account? [Create one](?register=true)")
 
@@ -51,21 +52,19 @@ def register_page():
     first_name = st.text_input("First name", key="first_name")
     last_name = st.text_input("Last name", key="last_name")
     email = st.text_input("Email", key="email")
-    password2 = st.text_input("Password", type="password", key="password2")
+    password2 = st.text_input("Password", type="password", key="password")
 
 # If the user enters all of the required details, create the account
     if st.button("Create Account"):
-        if first_name and last_name and email and password2:
+        if first_name and last_name and email and password:
            user_data = {
-                "First Name": [first_name],
-                "Last Name": [last_name],
-                "Email": [email],
-                "Password": [password2]
+                "Username": [first_name],
+                "Password": [password]
             }
            df = pd.DataFrame(user_data)
-           df.to_csv("user_data.csv", index=False)
+           df.to_csv("user_data.csv", mode="a", index=False, header=not st.session_state.get("is_csv_created", False))
            st.success("Account created successfully!")
-           st.session_state["is_logged_in"] = True
+           st.session_state["is_csv_created"] = True
            st.session_state["register"] = False
            st.experimental_rerun() 
         else:
@@ -180,6 +179,11 @@ def main():
             st.session_state["register"] = True
             register_page()
         else:
+            if not st.session_state.get("is_csv_created", False):
+                df = pd.DataFrame(columns=["Username", "Password"])
+                df.to_csv("user_data.csv", index=False)
+                st.session_state["is_csv_created"] = True
+
             login_page()
             if "register" in st.session_state and st.session_state["register"]:
                 register_page()
