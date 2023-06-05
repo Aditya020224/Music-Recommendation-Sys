@@ -1,4 +1,6 @@
 import streamlit as st
+import hashlib
+
 # Create a login form
 st.title("User Login")
 
@@ -25,7 +27,7 @@ password2 = st.text_input("Password", type="password", key="password2")
 if st.button("Create Account"):
     if first_name and last_name and email and password2:
         # Hash the password
-        hashed_password = st.hash_password(password2)
+        hashed_password = hashlib.sha256(password2.encode()).hexdigest()
 
         # Create a new user in the database
         user_data = {
@@ -43,6 +45,7 @@ if st.button("Create Account"):
 
 # Redirect the user to the recommendation page
 st.stop()
+
 
 
 st.set_page_config(page_title="Music Recommendation", layout="wide")
