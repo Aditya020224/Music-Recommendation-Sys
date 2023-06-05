@@ -190,9 +190,6 @@ def main():
         if st.session_state["is_logged_in"]:
             recommendation_page()
 
-    else:
-        recommendation_page()
-
 
 if __name__ == "__main__":
     main()
