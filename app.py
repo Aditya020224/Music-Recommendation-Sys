@@ -27,23 +27,16 @@ def n_neighbors_uri_audio(genre, start_year, end_year, test_feat):
     audios = genre_data.iloc[n_neighbors][audio_feats].to_numpy()
     return uris, audios
 
-
-def load_user_data():
-    user_data = pd.read_csv("user_data.csv")
-    return user_data
-def save_user_data(user_data):
-    user_data.to_csv("user_data.csv", index=False)
     
 # Create a login form
 def login_page():
     st.title("User Login")
-    user_data = load_user_data()
     username = st.text_input("Username", key="login_username")
     password = st.text_input("Password", type="password", key="login_password")
 
 # If the user enters a valid username and password, log them in
     if st.button("Login"):
-        user_data = pd.read_csv("user_data.csv")
+      user_data = pd.read_csv("user_data.csv")
         if username in user_data["Username"].values and password in user_data["Password"].values:
             st.success("Login successful!")
             st.session_state["is_logged_in"] = True
@@ -57,7 +50,6 @@ def login_page():
 # Create a registration form
 def register_page():
     st.write("Enter your details below to create a new account.")
-    user_data = load_user_data()
     first_name = st.text_input("First name", key="register_first_name")
     last_name = st.text_input("Last name", key="register_last_name")
     email = st.text_input("Email", key="register_email")
@@ -184,10 +176,10 @@ def main():
             st.session_state["register"] = True
             register_page()
         else:
-            user_data = load_user_data()
-            if user_data.empty:
-                user_data = pd.DataFrame(columns=["Username", "Password"])
-                save_user_data(user_data)
+            if not st.session_state.get("is_csv_created", False):
+                df = pd.DataFrame(columns=["Username", "Password"])
+                df.to_csv("user_data.csv", index=False)
+                st.session_state["is_csv_created"] = True
 
             login_page()
             if "register" in st.session_state and st.session_state["register"]:
