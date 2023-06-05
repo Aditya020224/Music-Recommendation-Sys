@@ -166,4 +166,4 @@ def recommendation_page():
             else:
                 st.write("No songs left to recommend")
 
-    page()
+page()
