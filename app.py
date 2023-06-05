@@ -79,7 +79,7 @@ def page():
             genre = st.sidebar.radio(
                 "",
                 genre_names, index=genre_names.index("K-pop"))
-             with col1:
+            with col1:
               st.markdown("***Feature customization:***")
               start_year, end_year = st.slider(
                   'Year Range',
