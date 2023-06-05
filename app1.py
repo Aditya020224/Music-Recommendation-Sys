@@ -28,14 +28,12 @@ def n_neighbors_uri_audio(genre, start_year, end_year, test_feat):
     audios = genre_data.iloc[n_neighbors][audio_feats].to_numpy()
     return uris, audios
 
-    
-# Create a login form
+
 def login_page():
     st.title("User Login")
     username = st.text_input("Username", key="login_username")
     password = st.text_input("Password", type="password", key="login_password")
 
-# If the user enters a valid username and password, log them in
     if st.button("Login"):
       user_data = pd.read_csv("user_data.csv")
       if username in user_data["Username"].values and password in user_data["Password"].values:
@@ -47,7 +45,6 @@ def login_page():
             
     st.markdown("Don't have an account? [Create one](?register=true)")
 
-# Create a registration form
 def register_page():
     st.write("Enter your details below to create a new account.")
     first_name = st.text_input("First name", key="register_first_name")
@@ -55,7 +52,6 @@ def register_page():
     email = st.text_input("Email", key="register_email")
     password = st.text_input("Password", type="password", key="register_password")
 
-# If the user enters all of the required details, create the account
     if st.button("Create Account", key="register_button"):
         if first_name and last_name and email and password:
             user_data = {
@@ -78,51 +74,51 @@ def recommendation_page():
         
     with st.container():
         col1, col2,col3,col4 = st.columns((2,0.5,0.5,0.5))
-        with col3:
-            st.sidebar.header("***Select genre:***")
-            genre = st.sidebar.radio(
-                "",
-                genre_names, index=genre_names.index("K-pop"), 
-                key=str(uuid.uuid4()))
-            with col1:
-                st.markdown("***Customize Features :***")
-                start_year, end_year = st.slider(
-                    'Select the year range',
-                    1990, 2019, (2010, 2019),
-                    key=str(uuid.uuid4())
-                )
-                acousticness = st.slider(
-                    'Acousticness',
-                    0.0, 1.0, 0.5,
-                    key=str(uuid.uuid4())
-                )
-                danceability = st.slider(
-                    'Danceability',
-                    0.0, 1.0, 0.5,
-                    key=str(uuid.uuid4())
-                )
-                energy = st.slider(
-                    'Energy',
-                    0.0, 1.0, 0.5,
-                    key=str(uuid.uuid4())
-                )
-                instrumentalness = st.slider(
-                    'Instrumentalness',
-                    0.0, 1.0, 0.0,
-                    key=str(uuid.uuid4())
-                )
-                valence = st.slider(
-                    'Valence',
-                    0.0, 1.0, 0.45,
-                    key=str(uuid.uuid4())
-                )
-                tempo = st.slider(
-                    'Tempo',
-                    0.0, 244.0, 118.0,
-                    key=str(uuid.uuid4())
-                )
+        with col1:
+            st.markdown("***Customize Features :***")
+            start_year, end_year = st.slider(
+                'Select the year range',
+                1990, 2019, (2010, 2019),
+                key=str(uuid.uuid4())
+            )
+            acousticness = st.slider(
+                'Acousticness',
+                0.0, 1.0, 0.5,
+                key=str(uuid.uuid4())
+            )
+            danceability = st.slider(
+                'Danceability',
+                0.0, 1.0, 0.5,
+                key=str(uuid.uuid4())
+            )
+            energy = st.slider(
+                'Energy',
+                0.0, 1.0, 0.5,
+                key=str(uuid.uuid4())
+            )
+            instrumentalness = st.slider(
+                'Instrumentalness',
+                0.0, 1.0, 0.0,
+                key=str(uuid.uuid4())
+            )
+            valence = st.slider(
+                'Valence',
+                0.0, 1.0, 0.45,
+                key=str(uuid.uuid4())
+            )
+            tempo = st.slider(
+                'Tempo',
+                0.0, 244.0, 118.0,
+                key=str(uuid.uuid4())
+            )
+            with col3:
+                st.sidebar.header("***Select genre:***")
+                genre = st.sidebar.radio(
+                    "",
+                    genre_names, index=genre_names.index("K-pop"), 
+                    key=str(uuid.uuid4()))
                     
-    tracks_per_page = 6
+    tracks_per_page = 8
     test_feat = [acousticness, danceability, energy, instrumentalness, valence, tempo]
     uris, audios = n_neighbors_uri_audio(genre, start_year, end_year, test_feat)
 
