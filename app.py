@@ -35,7 +35,7 @@ def login_page():
 
 # If the user enters a valid username and password, log them in
     if st.button("Login"):
-        if username == "admin" and password1 == "password":
+        if username == "first_name" and password1 == "password2":
              st.success("Login successful!")
              st.session_state["is_logged_in"] = True
              recommendation_page()
