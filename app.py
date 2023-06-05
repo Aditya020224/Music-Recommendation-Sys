@@ -67,9 +67,7 @@ def register_page():
              df = pd.DataFrame(user_data)
              df.to_csv("user_data.csv", index=False)
              st.success("Account created successfully!")
-             st.session_state["register"] = False
-             st.experimental_rerun()
-             st.experimental_set_query_params(register=None)
+             st.experimental_set_query_params(register=False)
         else:
              st.warning("Please enter all of the required details.")
 
