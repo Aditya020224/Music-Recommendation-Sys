@@ -77,12 +77,12 @@ def recommendation_page():
     st.markdown("##")
         
  
-     with st.sidebar:
-          st.header("***Select genre:***")
-          genre = st.radio(
-              "",
-              genre_names, index=genre_names.index("K-pop"), 
-              key=str(uuid.uuid4()))
+    with st.sidebar:
+         st.header("***Select genre:***")
+         genre = st.radio(
+             "",
+             genre_names, index=genre_names.index("K-pop"), 
+             key=str(uuid.uuid4()))
         with st.container():
             col1, col2, col3 = st.columns([2, 0.5, 2])
             with col1:
