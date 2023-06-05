@@ -1,4 +1,8 @@
 import streamlit as st
+import pandas as pd
+from sklearn.neighbors import NearestNeighbors
+import plotly.express as px
+import streamlit.components.v1 as components
 st.set_page_config(page_title="Music Recommendation", layout="wide")
 
 # Create a login form
@@ -10,12 +14,14 @@ password1 = st.text_input("Password", type="password", key="password1")
 # If the user enters a valid username and password, log them in
 if st.button("Login"):
     if username == "admin" and password1 == "password":
-        st.success("Login successful!")
-        st.session_state["redirect_to"] = "/recommendation"
-    else:
-        st.warning("Invalid username or password.")
+            st.success("Login successful!")
+            st.session_state["is_logged_in"] = True
+            st.experimental_rerun()  # Rerun the app to show the recommendation page
+        else:
+            st.warning("Invalid username or password.")
 
-# Create a register form
+# Create a registration form
+def register_page():
 st.write("Enter your details below to create a new account.")
 
 first_name = st.text_input("First name", key="first_name")
@@ -27,21 +33,13 @@ password2 = st.text_input("Password", type="password", key="password2")
 if st.button("Create Account"):
     if first_name and last_name and email and password2:
         st.success("Account created successfully!")
-        st.session_state["redirect_to"] = "/recommendation"
-    else:
-        st.warning("Please enter all of the required details.")
-
-# Redirect the user to the recommendation page
-if "redirect_to" in st.session_state:
-    st.experimental_redirect(st.session_state["redirect_to"])
+        st.session_state["is_logged_in"] = True
+        st.experimental_rerun()  # Rerun the app to show the recommendation page
+        else:
+            st.warning("Please enter all of the required details.")
 
 
-
-import pandas as pd
-from sklearn.neighbors import NearestNeighbors
-import plotly.express as px
-import streamlit.components.v1 as components
-
+def recommendation_page():
 @st.cache(allow_output_mutation=True)
 def load_data():
     df = pd.read_csv("data/processed_track_df.csv")
