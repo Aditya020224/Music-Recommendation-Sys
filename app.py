@@ -60,46 +60,45 @@ def page():
         uris = genre_data.iloc[n_neighbors]["uri"].tolist()
         audios = genre_data.iloc[n_neighbors][audio_feats].to_numpy()
         return uris, audios
-
-def page():
-    title = "Music Recommendation System"
-    st.title(title)
-
-    st.write("Welcome! Here you can customize what you want to listen to based on genres. And listen to the songs recommended by our system!")
-    st.markdown("##")
-
-    with st.container():
-        col1, col2,col3,col4 = st.columns((2,0.5,0.5,0.5))
-        with col3:
-            st.sidebar.header("***Select genre:***")
-            genre = st.sidebar.radio(
-                "",
-                genre_names, index=genre_names.index("K-Pop"))
-        with col1:
-            st.markdown("***Customize Features :***")
-            start_year, end_year = st.slider(
-                'Select the year range',
-                1990, 2019, (2010, 2019)
-            )
-            acousticness = st.slider(
-                'Acousticness',
-                0.0, 1.0, 0.5)
-            danceability = st.slider(
-                'Danceability',
-                0.0, 1.0, 0.5)
-            energy = st.slider(
-                'Energy',
-                0.0, 1.0, 0.5)
-            instrumentalness = st.slider(
-                'Instrumentalness',
-                0.0, 1.0, 0.0)
-            valence = st.slider(
-                'Valence',
-                0.0, 1.0, 0.45)
-            tempo = st.slider(
-                'Tempo',
-                0.0, 244.0, 118.0)
-
+    def page():
+        title = "Music Recommendation System"
+        st.title(title)
+        
+        st.write("Welcome! Here you can customize what you want to listen to based on genres. And listen to the songs recommended by our system!")
+        st.markdown("##")
+        
+        with st.container():
+            col1, col2,col3,col4 = st.columns((2,0.5,0.5,0.5))
+            with col3:
+                st.sidebar.header("***Select genre:***")
+                genre = st.sidebar.radio(
+                    "",
+                    genre_names, index=genre_names.index("K-Pop"))
+                with col1:
+                    st.markdown("***Customize Features :***")
+                    start_year, end_year = st.slider(
+                        'Select the year range',
+                        1990, 2019, (2010, 2019)
+                    )
+                    acousticness = st.slider(
+                        'Acousticness',
+                        0.0, 1.0, 0.5)
+                    danceability = st.slider(
+                        'Danceability',
+                        0.0, 1.0, 0.5)
+                    energy = st.slider(
+                        'Energy',
+                        0.0, 1.0, 0.5)
+                    instrumentalness = st.slider(
+                        'Instrumentalness',
+                        0.0, 1.0, 0.0)
+                    valence = st.slider(
+                        'Valence',
+                        0.0, 1.0, 0.45)
+                    tempo = st.slider(
+                        'Tempo',
+                        0.0, 244.0, 118.0)
+                    
     tracks_per_page = 6
     test_feat = [acousticness, danceability, energy, instrumentalness, valence, tempo]
     uris, audios = n_neighbors_uri_audio(genre, start_year, end_year, test_feat)
