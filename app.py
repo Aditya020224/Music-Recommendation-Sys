@@ -64,7 +64,6 @@ def register_page():
             df = pd.DataFrame(user_data)
             df.to_csv("user_data.csv", index=False)
             st.success("Account created successfully! Please log in.")
-            st.session_state["register"] = False
             st.experimental_rerun()
         else:
              st.warning("Please enter all of the required details.")
@@ -82,7 +81,8 @@ def recommendation_page():
             st.sidebar.header("***Select genre:***")
             genre = st.sidebar.radio(
                 "",
-                genre_names, index=genre_names.index("K-pop"), key="genre_radio_" + str(genre_names.index("K-pop")))
+                genre_names, index=genre_names.index("K-pop"), 
+                   key=str(uuid.uuid4()))
             with col1:
                 st.markdown("***Customize Features :***")
                 start_year, end_year = st.slider(
@@ -91,22 +91,22 @@ def recommendation_page():
                 )
                 acousticness = st.slider(
                     'Acousticness',
-                    0.0, 1.0, 0.5, key="acousticness_slider")
+                    0.0, 1.0, 0.5)
                 danceability = st.slider(
                     'Danceability',
-                    0.0, 1.0, 0.5, key="danceability_slider")
+                    0.0, 1.0, 0.5)
                 energy = st.slider(
                     'Energy',
-                    0.0, 1.0, 0.5, key="energy_slider")
+                    0.0, 1.0, 0.5)
                 instrumentalness = st.slider(
                     'Instrumentalness',
-                    0.0, 1.0, 0.0, key="instrumentalness_slider")
+                    0.0, 1.0, 0.0)
                 valence = st.slider(
                     'Valence',
-                    0.0, 1.0, 0.45, key="valence_slider")
+                    0.0, 1.0, 0.45)
                 tempo = st.slider(
                     'Tempo',
-                    0.0, 244.0, 118.0, key="tempo_slider")
+                    0.0, 244.0, 118.0)
                     
     tracks_per_page = 6
     test_feat = [acousticness, danceability, energy, instrumentalness, valence, tempo]
@@ -189,6 +189,9 @@ def main():
 
         if st.session_state["is_logged_in"]:
             recommendation_page()
+
+    else:
+        recommendation_page()
 
 
 if __name__ == "__main__":
