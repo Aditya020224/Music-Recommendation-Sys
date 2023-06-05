@@ -31,7 +31,7 @@ def n_neighbors_uri_audio(genre, start_year, end_year, test_feat):
 def login_page():
     st.title("User Login")
     username = st.text_input("Username", key="username")
-    password1 = st.text_input("Password", type="password", key="password")
+    password = st.text_input("Password", type="password", key="password")
 
 # If the user enters a valid username and password, log them in
     if st.button("Login"):
@@ -52,7 +52,7 @@ def register_page():
     first_name = st.text_input("First name", key="first_name")
     last_name = st.text_input("Last name", key="last_name")
     email = st.text_input("Email", key="email")
-    password2 = st.text_input("Password", type="password", key="password")
+    password = st.text_input("Password", type="password", key="password")
 
 # If the user enters all of the required details, create the account
     if st.button("Create Account"):
