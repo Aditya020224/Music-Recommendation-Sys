@@ -10,7 +10,7 @@ password1 = st.text_input("Password", type="password", key="password1")
 if st.button("Login"):
     if username == "admin" and password1 == "password":
         st.success("Login successful!")
-        st.experimental_redirect("/recommendation")
+        st.session_state["redirect_to"] = "/recommendation"
     else:
         st.warning("Invalid username or password.")
 
@@ -26,12 +26,14 @@ password2 = st.text_input("Password", type="password", key="password2")
 if st.button("Create Account"):
     if first_name and last_name and email and password2:
         st.success("Account created successfully!")
-        st.experimental_redirect("/recommendation")
+        st.session_state["redirect_to"] = "/recommendation"
     else:
         st.warning("Please enter all of the required details.")
 
 # Redirect the user to the recommendation page
-st.experimental_redirect("/recommendation")
+if "redirect_to" in st.session_state:
+    st.experimental_redirect(st.session_state["redirect_to"])
+
 
 
 
