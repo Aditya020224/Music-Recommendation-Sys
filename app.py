@@ -67,6 +67,7 @@ def register_page():
            st.success("Account created successfully!")
            st.session_state["is_logged_in"] = True
            st.session_state["register"] = False
+           st.experimental_rerun() 
         else:
             st.warning("Please enter all of the required details.")
 
