@@ -69,6 +69,7 @@ def register_page():
              st.success("Account created successfully!")
              st.session_state["register"] = False
              st.experimental_rerun()
+             st.experimental_set_query_params(register=None)
         else:
              st.warning("Please enter all of the required details.")
 
