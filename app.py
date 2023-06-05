@@ -65,105 +65,105 @@ def recommendation_page():
         audios = genre_data.iloc[n_neighbors][audio_feats].to_numpy()
         return uris, audios
 
-    def page():
-        title = "Music Recommendation System"
-        st.title(title)
+def page():
+    title = "Music Recommendation System"
+    st.title(title)
 
-        st.write("Welcome! Here you can listen to the songs recommended by our system and customize it based on audio features and genres!")
-        st.markdown("##")
+    st.write("Welcome! Here you can listen to the songs recommended by our system and customize it based on audio features and genres!")
+    st.markdown("##")
 
-        with st.container():
-            col1, col2,col3,col4 = st.columns((2,0.5,0.5,0.5))
-            with col3:
-                st.sidebar.header("***Select genre:***")
-                genre = st.sidebar.radio(
-                    "",
-                    genre_names, index=genre_names.index("K-pop"))
-            with col1:
-                st.markdown("***Feature customization:***")
-                start_year, end_year = st.slider(
-                    'Year Range',
-                    1990, 2023, (2010, 2023)
-                )
-                acousticness = st.slider(
-                    'Acousticness',
-                    0.0, 1.0, 0.5)
-                danceability = st.slider(
-                    'Danceability',
-                    0.0, 1.0, 0.5)
-                energy = st.slider(
-                    'Energy',
-                    0.0, 1.0, 0.5)
-                instrumentalness = st.slider(
-                    'Instrumentalness',
-                    0.0, 1.0, 0.0)
-                valence = st.slider(
-                    'Valence',
-                    0.0, 1.0, 0.45)
-                tempo = st.slider(
-                    'Tempo',
-                    0.0, 244.0, 118.0)
+    with st.container():
+        col1, col2,col3,col4 = st.columns((2,0.5,0.5,0.5))
+        with col3:
+            st.sidebar.header("***Select genre:***")
+            genre = st.sidebar.radio(
+                "",
+                genre_names, index=genre_names.index("K-pop"))
+         with col1:
+            st.markdown("***Feature customization:***")
+            start_year, end_year = st.slider(
+                'Year Range',
+                1990, 2023, (2010, 2023)
+            )
+            acousticness = st.slider(
+                'Acousticness',
+                0.0, 1.0, 0.5)
+            danceability = st.slider(
+                'Danceability',
+                0.0, 1.0, 0.5)
+            energy = st.slider(
+                'Energy',
+                0.0, 1.0, 0.5)
+            instrumentalness = st.slider(
+                'Instrumentalness',
+                0.0, 1.0, 0.0)
+            valence = st.slider(
+                'Valence',
+                0.0, 1.0, 0.45)
+            tempo = st.slider(
+                'Tempo',
+                0.0, 244.0, 118.0)
 
-        tracks_per_page = 8
-        test_feat = [acousticness, danceability, energy, instrumentalness, valence, tempo]
-        uris, audios = n_neighbors_uri_audio(genre, start_year, end_year, test_feat)
+    tracks_per_page = 8
+    test_feat = [acousticness, danceability, energy, instrumentalness, valence, tempo]
+    uris, audios = n_neighbors_uri_audio(genre, start_year, end_year, test_feat)
 
-        tracks = []
-        for uri in uris:
-            track = """<iframe src="https://open.spotify.com/embed/track/{}" width="260" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>""".format(uri)
-            tracks.append(track)
+    tracks = []
+    for uri in uris:
+        track = """<iframe src="https://open.spotify.com/embed/track/{}" width="260" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>""".format(uri)
+        tracks.append(track)
 
-        if 'previous_inputs' not in st.session_state:
-            st.session_state['previous_inputs'] = [genre, start_year, end_year] + test_feat
+    if 'previous_inputs' not in st.session_state:
+        st.session_state['previous_inputs'] = [genre, start_year, end_year] + test_feat
     
-        current_inputs = [genre, start_year, end_year] + test_feat
-        if current_inputs != st.session_state['previous_inputs']:
-            if 'start_track_i' in st.session_state:
-                st.session_state['start_track_i'] = 0
-            st.session_state['previous_inputs'] = current_inputs
-
-        if 'start_track_i' not in st.session_state:
+    current_inputs = [genre, start_year, end_year] + test_feat
+    if current_inputs != st.session_state['previous_inputs']:
+        if 'start_track_i' in st.session_state:
             st.session_state['start_track_i'] = 0
-    
-        with st.container():
-            col1, col2, col3 = st.columns([2,1,2])
-            if st.button("Recommend More Songs"):
-                if st.session_state['start_track_i'] < len(tracks):
-                    st.session_state['start_track_i'] += tracks_per_page
+        st.session_state['previous_inputs'] = current_inputs
 
-            current_tracks = tracks[st.session_state['start_track_i']: st.session_state['start_track_i'] + tracks_per_page]
-            current_audios = audios[st.session_state['start_track_i']: st.session_state['start_track_i'] + tracks_per_page]
+    if 'start_track_i' not in st.session_state:
+        st.session_state['start_track_i'] = 0
+    
+    with st.container():
+        col1, col2, col3 = st.columns([2,1,2])
+        if st.button("Recommend More Songs"):
             if st.session_state['start_track_i'] < len(tracks):
-                for i, (track, audio) in enumerate(zip(current_tracks, current_audios)):
-                    if i%2==0:
-                        with col1:
-                            components.html(
-                                track,
-                                height=400,
-                            )
-                            with st.expander("See details"):
-                                df = pd.DataFrame(dict(
+                st.session_state['start_track_i'] += tracks_per_page
+
+        current_tracks = tracks[st.session_state['start_track_i']: st.session_state['start_track_i'] + tracks_per_page]
+        current_audios = audios[st.session_state['start_track_i']: st.session_state['start_track_i'] + tracks_per_page]
+        if st.session_state['start_track_i'] < len(tracks):
+            for i, (track, audio) in enumerate(zip(current_tracks, current_audios)):
+                if i%2==0:
+                    with col1:
+                        components.html(
+                            track,
+                            height=400,
+                        )
+                        with st.expander("See details"):
+                            df = pd.DataFrame(dict(
+                            r=audio[:5],
+                            theta=audio_feats[:5]))
+                            fig = px.line_polar(df, r='r', theta='theta', line_close=True)
+                            fig.update_layout(height=400, width=340)
+                            st.plotly_chart(fig)
+            
+                else:
+                    with col3:
+                        components.html(
+                            track,
+                            height=400,
+                        )
+                        with st.expander("See details"):
+                            df = pd.DataFrame(dict(
                                 r=audio[:5],
                                 theta=audio_feats[:5]))
-                                fig = px.line_polar(df, r='r', theta='theta', line_close=True)
-                                fig.update_layout(height=400, width=340)
-                                st.plotly_chart(fig)
-            
-                    else:
-                        with col3:
-                            components.html(
-                                track,
-                                height=400,
-                            )
-                            with st.expander("See details"):
-                                df = pd.DataFrame(dict(
-                                    r=audio[:5],
-                                    theta=audio_feats[:5]))
-                                fig = px.line_polar(df, r='r', theta='theta', line_close=True)
-                                fig.update_layout(height=400, width=340)
-                                st.plotly_chart(fig)
+                            fig = px.line_polar(df, r='r', theta='theta', line_close=True)
+                            fig.update_layout(height=400, width=340)
+                            st.plotly_chart(fig)
 
-            else:
-                st.write("No songs left to recommend")
+        else:
+            st.write("No songs left to recommend")
 
 page()
