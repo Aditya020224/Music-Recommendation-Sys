@@ -38,7 +38,6 @@ def register_page():
             st.warning("Please enter all of the required details.")
 
 
-def page():
     @st.cache(allow_output_mutation=True)
     def load_data():
         df = pd.read_csv("data/processed_track_df.csv")
