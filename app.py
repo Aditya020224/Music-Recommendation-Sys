@@ -183,6 +183,10 @@ def main():
             login_page()
             if "register" in st.session_state and st.session_state["register"]:
                 register_page()
+
+        if st.session_state["is_logged_in"]:
+            recommendation_page()
+
     else:
         recommendation_page()
 
