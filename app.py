@@ -16,7 +16,6 @@ def login_page():
         if username == "admin" and password1 == "password":
              st.success("Login successful!")
              st.session_state["is_logged_in"] = True
-             st.experimental_rerun()  # Rerun the app to show the recommendation page
         else:
              st.warning("Invalid username or password.")
 
@@ -33,7 +32,6 @@ def register_page():
         if first_name and last_name and email and password2:
             st.success("Account created successfully!")
             st.session_state["is_logged_in"] = True
-            st.experimental_rerun()  # Rerun the app to show the recommendation page
         else:
             st.warning("Please enter all of the required details.")
 
@@ -158,5 +156,12 @@ def page():
 
         else:
             st.write("No songs left to recommend")
+            
+def main():
+    if st.session_state.get("is_logged_in"):
+        page()
+    else:
+        login_page()
 
-page()
+if __name__ == "__main__":
+    main()
