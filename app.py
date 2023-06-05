@@ -1,4 +1,39 @@
 import streamlit as st
+
+# Create a login form
+st.title("User Login")
+
+username = st.text_input("Username")
+password = st.text_input("Password", type="password")
+
+# If the user enters a valid username and password, log them in
+if st.button("Login"):
+    if username == "admin" and password == "password":
+        st.success("Login successful!")
+        st.redirect("/recommendation")
+    else:
+        st.warning("Invalid username or password.")
+
+# If the user clicks on the "Register" button, create a new user account
+if st.button("Register"):
+    st.write("Enter your details below to create a new account.")
+
+    first_name = st.text_input("First name")
+    last_name = st.text_input("Last name")
+    email = st.text_input("Email")
+    password = st.text_input("Password", type="password")
+
+    # If the user enters all of the required details, create the account
+    if st.button("Create Account"):
+        if first_name and last_name and email and password:
+            st.success("Account created successfully!")
+            st.redirect("/recommendation")
+        else:
+            st.warning("Please enter all of the required details.")
+
+# Redirect the user to the recommendation page
+st.stop()
+
 st.set_page_config(page_title="Music Recommendation", layout="wide")
 
 import pandas as pd
