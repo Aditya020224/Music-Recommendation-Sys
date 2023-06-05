@@ -83,31 +83,44 @@ def recommendation_page():
             genre = st.sidebar.radio(
                 "",
                 genre_names, index=genre_names.index("K-pop"), 
-                   key=str(uuid.uuid4()))
+                key=str(uuid.uuid4()))
             with col1:
                 st.markdown("***Customize Features :***")
                 start_year, end_year = st.slider(
                     'Select the year range',
-                    1990, 2019, (2010, 2019)
+                    1990, 2019, (2010, 2019),
+                    key=str(uuid.uuid4())
                 )
                 acousticness = st.slider(
                     'Acousticness',
-                    0.0, 1.0, 0.5)
+                    0.0, 1.0, 0.5,
+                    key=str(uuid.uuid4())
+                )
                 danceability = st.slider(
                     'Danceability',
-                    0.0, 1.0, 0.5)
+                    0.0, 1.0, 0.5,
+                    key=str(uuid.uuid4())
+                )
                 energy = st.slider(
                     'Energy',
-                    0.0, 1.0, 0.5)
+                    0.0, 1.0, 0.5,
+                    key=str(uuid.uuid4())
+                )
                 instrumentalness = st.slider(
                     'Instrumentalness',
-                    0.0, 1.0, 0.0)
+                    0.0, 1.0, 0.0,
+                    key=str(uuid.uuid4())
+                )
                 valence = st.slider(
                     'Valence',
-                    0.0, 1.0, 0.45)
+                    0.0, 1.0, 0.45,
+                    key=str(uuid.uuid4())
+                )
                 tempo = st.slider(
                     'Tempo',
-                    0.0, 244.0, 118.0)
+                    0.0, 244.0, 118.0,
+                    key=str(uuid.uuid4())
+                )
                     
     tracks_per_page = 6
     test_feat = [acousticness, danceability, energy, instrumentalness, valence, tempo]
