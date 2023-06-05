@@ -1,32 +1,51 @@
 import streamlit as st
-st.title("User SignIn")
 
-username = st.text_input("Username" , key="username")
-password = st.text_input("Password", type="password" , key="password")
+# Create a login form
+st.title("User Login")
 
-if st.button("SignIn"):
+username = st.text_input("Username", key="username")
+password = st.text_input("Password", type="password", key="password")
+
+# If the user enters a valid username and password, log them in
+if st.button("Sign In"):
     if username == "admin" and password == "password":
         st.success("Login successfull!")
         st.redirect("/recommendation")
     else:
-        st.warning("Invalid username or password Entered.")
+        st.warning("Invalid username or password entered.")
 
-if st.button("New User SignUp"):
+# If the user clicks on the "Register" button, create a new user account
+if st.button("New User Sign Up"):
     st.write("Enter your details below to create a new account.")
 
-    first_name = st.text_input("First name" , key="first_name")
-    last_name = st.text_input("Last name" , key="last_name")
-    email = st.text_input("Email" , key="email")
-    password = st.text_input("Password", type="password" , key="password")
+    first_name = st.text_input("First name", key="first_name")
+    last_name = st.text_input("Last name", key="last_name")
+    email = st.text_input("Email", key="email")
+    password = st.text_input("Password", type="password", key="password")
 
+    # If the user enters all of the required details, create the account
     if st.button("Create Account"):
         if first_name and last_name and email and password:
+            # Hash the password
+            hashed_password = st.hash_password(password)
+
+            # Create a new user in the database
+            user_data = {
+                "first_name": first_name,
+                "last_name": last_name,
+                "email": email,
+                "password": hashed_password,
+            }
+            st.database.insert(user_data)
+
             st.success("Account created successfully!")
             st.redirect("/recommendation")
         else:
             st.warning("Please enter all of the required details.")
 
+# Redirect the user to the recommendation page
 st.stop()
+
 
 st.set_page_config(page_title="Music Recommendation", layout="wide")
 
