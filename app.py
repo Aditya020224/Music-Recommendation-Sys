@@ -56,7 +56,7 @@ def register_page():
     password = st.text_input("Password", type="password", key="register_password")
 
 # If the user enters all of the required details, create the account
-    if st.button("Create Account"):
+    if st.button("Create Account", key="register_button"):
         if first_name and last_name and email and password:
             user_data = {
                 "Username": [first_name],
