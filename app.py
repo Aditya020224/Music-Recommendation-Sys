@@ -58,7 +58,7 @@ def n_neighbors_uri_audio(genre, start_year, end_year, test_feat):
     uris = genre_data.iloc[n_neighbors]["uri"].tolist()
     audios = genre_data.iloc[n_neighbors][audio_feats].to_numpy()
     return uris, audios
-def page():
+def recommendation_page():
     title = "Music Recommendation System"
     st.title(title)
         
