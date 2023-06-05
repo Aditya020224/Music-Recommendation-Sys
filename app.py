@@ -1,6 +1,4 @@
 import streamlit as st
-import hashlib
-from streamlit.database import Database
 
 # Create a login form
 st.title("User Login")
