@@ -161,6 +161,7 @@ def recommendation_page():
                             theta=audio_feats[:5]))
                             fig = px.line_polar(df, r='r', theta='theta', line_close=True)
                             fig.update_layout(height=400, width=340)
+                            fig.update_traces(fill='toself')  
                             st.plotly_chart(fig)
             
                 else:
@@ -175,6 +176,7 @@ def recommendation_page():
                                 theta=audio_feats[:5]))
                             fig = px.line_polar(df, r='r', theta='theta', line_close=True)
                             fig.update_layout(height=400, width=340)
+                            fig.update_traces(fill='toself')  
                             st.plotly_chart(fig)
 
         else:
