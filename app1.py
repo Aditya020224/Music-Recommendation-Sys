@@ -115,8 +115,7 @@ def recommendation_page():
              st.sidebar.header("***Select genre:***")
              genre = st.sidebar.radio(
                  "",
-                 genre_names, index=genre_names.index("K-pop"), 
-                 key=str(uuid.uuid4()))
+                 genre_names, index=genre_names.index("K-pop"))
                     
     tracks_per_page = 8
     test_feat = [acousticness, danceability, energy, instrumentalness, valence, tempo]
