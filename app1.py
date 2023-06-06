@@ -4,6 +4,8 @@ from sklearn.neighbors import NearestNeighbors
 import plotly.express as px
 import uuid
 import streamlit.components.v1 as components
+import warnings
+warnings.filterwarnings("ignore", category=FutureWarning)
 st.set_page_config(page_title="Music Recommendation", layout="wide")
 
 @st.cache_data()
