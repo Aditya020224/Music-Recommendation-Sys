@@ -111,12 +111,12 @@ def recommendation_page():
                 0.0, 244.0, 118.0,
                 key=str(uuid.uuid4())
             )
-            with col3:
-                st.sidebar.header("***Select genre:***")
-                genre = st.sidebar.radio(
-                    "",
-                    genre_names, index=genre_names.index("K-pop"), 
-                    key=str(uuid.uuid4()))
+        with col3:
+             st.sidebar.header("***Select genre:***")
+             genre = st.sidebar.radio(
+                 "",
+                 genre_names, index=genre_names.index("K-pop"), 
+                 key=str(uuid.uuid4()))
                     
     tracks_per_page = 8
     test_feat = [acousticness, danceability, energy, instrumentalness, valence, tempo]
