@@ -104,8 +104,7 @@ def recommendation_page():
             )
             tempo = st.slider(
                 'Tempo',
-                0.0, 244.0, 118.0,
-                key=str(uuid.uuid4())
+                0.0, 244.0, 118.0
             )
         with col3:
              st.sidebar.header("***Select genre:***")
