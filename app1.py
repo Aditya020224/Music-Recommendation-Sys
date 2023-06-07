@@ -84,28 +84,23 @@ def recommendation_page():
             )
             acousticness = st.slider(
                 'Acousticness',
-                0.0, 1.0, 0.5,
-                key=str(uuid.uuid4())
+                0.0, 1.0, 0.5
             )
             danceability = st.slider(
                 'Danceability',
-                0.0, 1.0, 0.5,
-                key=str(uuid.uuid4())
+                0.0, 1.0, 0.5
             )
             energy = st.slider(
                 'Energy',
-                0.0, 1.0, 0.5,
-                key=str(uuid.uuid4())
+                0.0, 1.0, 0.5
             )
             instrumentalness = st.slider(
                 'Instrumentalness',
-                0.0, 1.0, 0.0,
-                key=str(uuid.uuid4())
+                0.0, 1.0, 0.0
             )
             valence = st.slider(
                 'Valence',
-                0.0, 1.0, 0.45,
-                key=str(uuid.uuid4())
+                0.0, 1.0, 0.45
             )
             tempo = st.slider(
                 'Tempo',
