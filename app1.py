@@ -80,8 +80,7 @@ def recommendation_page():
             st.markdown("***Customize Features :***")
             start_year, end_year = st.slider(
                 'Select the year range',
-                1990, 2019, (2010, 2019),
-                key=str(uuid.uuid4())
+                1990, 2019, (2010, 2019)
             )
             acousticness = st.slider(
                 'Acousticness',
